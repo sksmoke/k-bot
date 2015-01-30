@@ -12,7 +12,7 @@ module.exports = (robot) ->
     if time.length is 10
       msg.send moment.unix(Number(time)).format('YYYY年MM月DD日HH時mm分ss秒')
     else if time.length is 14
-      msg.send moment(time, 'YYYYMMDDHHmmss').unix()
+      msg.send moment.tz(time, 'YYYYMMDDHHmmss', 'Asia/Tokyo').unix()
     else
       msg.send "10桁か14桁で入力してください。"
 
