@@ -35,9 +35,10 @@ module.exports = (robot) ->
 
   robot.respond /16decode (.*)$/i, (msg) ->
     src = msg.match[1]
-    utf16charArray = src.split('\\\\u')
+    console.log src
+    utf16charArray = src.split('\\u')
     utf16charArray.shift()
     stringArray = utf16charArray.map (arg) ->
       String.fromCharCode(parseInt(arg, 16))
-    console.log stringArray.join('')
+    msg.send stringArray.join('')
 
