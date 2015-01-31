@@ -1,8 +1,12 @@
 # Description:
-#   Utility commands surrounding Hubot uptime.
+#   Utility commands.
 #
 # Commands:
-#   hubot unixtime <text>- Reply UnixTimeStamp to YYYYMMDDHHmmss JPN or YYYYMMDDHHmmss to UnixTimeStamp
+#   hubot unixtime <text>- Reply UnixTimeStamp to YYYY年MM月DD日HH時mm分ss秒
+#   hubot urlencode <text>- Reply URL Encoded String
+#   hubot urldecode <text>- Reply URL Decoded String
+#   hubot 16encode <text>- Reply native to ascii
+#   hubot 16decode <text>- Reply ascii to native
 moment = require 'moment-timezone'
 querystring = require 'querystring'
 
@@ -11,10 +15,8 @@ module.exports = (robot) ->
     time = msg.match[1]
     if time.length is 10
       msg.send moment.tz(Number(time + '000'), 'Asia/Tokyo').format('YYYY年MM月DD日HH時mm分ss秒')
-    else if time.length is 14
-      msg.send moment.tz(time, 'YYYYMMDDHHmmss', 'Asia/Tokyo').unix()
     else
-      msg.send "10桁か14桁で入力してください。"
+      msg.send "10桁で入力してください。"
 
   robot.respond /urlencode (.*)$/i, (msg) ->
     src = msg.match[1]
@@ -33,7 +35,7 @@ module.exports = (robot) ->
 
   robot.respond /16decode (.*)$/i, (msg) ->
     src = msg.match[1]
-    utf16charArray = src.split('\\u')
+    utf16charArray = src.split('\\\\u')
     utf16charArray.shift()
     stringArray = utf16charArray.map (arg) ->
       String.fromCharCode(parseInt(arg, 16))
