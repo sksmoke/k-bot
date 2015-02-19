@@ -30,7 +30,8 @@
     "moment-timezone": "~0.3.0",
     "querystring": "~0.2.0",
     "time": "~0.11.0",
-    "hubot-slack": "~3.2.1"
+    "hubot-slack": "~3.2.1",
+    "hubot-redis-brain": "0.0.2"
   },
   "engines": {
     "node": ">= 0.8.x",
